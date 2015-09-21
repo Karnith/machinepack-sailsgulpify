@@ -1,0 +1,27 @@
+{
+  "name": "machinepack-sailsgulpify",
+  "main": "index.js",
+  "version": "0.0.0",
+  "authors": [
+    "Matthew Marino <mmarino@jcmar.com>"
+  ],
+  "description": "Add toggle ability to choose gulp or grunt as task runner on create new",
+  "moduleType": [
+    "node"
+  ],
+  "keywords": [
+    "Sails",
+    "Machine",
+    "Pack",
+    "Gulp"
+  ],
+  "license": "MIT",
+  "homepage": "http://www.jcmar.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

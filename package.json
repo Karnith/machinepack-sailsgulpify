@@ -1,0 +1,37 @@
+{
+  "name": "machinepack-sailsgulpify",
+  "version": "0.1.0",
+  "description": "Add toggle ability to choose gulp or grunt as task runner on create new ",
+  "scripts": {
+    "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js"
+  },
+  "keywords": [
+    "SailsGulpify",
+    "machines",
+    "machinepack"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "machine": "^10.0.0"
+  },
+  "devDependencies": {
+    "test-machinepack-mocha": "^2.0.0"
+  },
+  "machinepack": {
+    "friendlyName": "SailsGulpify",
+    "machineDir": "machines/",
+    "machines": [
+      "create-gulp-file",
+      "create-gulp-tasks",
+      "create-engine-toggle"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Karnith/machinepack-sailsgulpify.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Karnith/machinepack-sailsgulpify/issues"
+  }
+}
