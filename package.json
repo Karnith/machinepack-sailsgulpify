@@ -13,7 +13,9 @@
   "author": "",
   "license": "MIT",
   "dependencies": {
-    "machine": "^10.0.0"
+    "fs-extra": "^0.24.0",
+    "machine": "^10.0.0",
+    "machinepack-fs": "^5.3.0"
   },
   "devDependencies": {
     "test-machinepack-mocha": "^2.0.0"
@@ -24,7 +26,8 @@
     "machines": [
       "create-gulp-file",
       "create-gulp-tasks",
-      "create-engine-toggle"
+      "create-engine-toggle",
+      "sails-gulpify"
     ]
   },
   "repository": {
