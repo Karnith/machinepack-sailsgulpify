@@ -46,7 +46,9 @@ module.exports = {
   fn: function(inputs, exits, env) {
     var createGulpFile = require('machine').build(require('./create-gulp-file')),
       createGulpTasks = require('machine').build(require('./create-gulp-tasks')),
-      createEngineToggle = require('machine').build(require('./create-engine-toggle'));
+      createEngineToggle = require('machine').build(require('./create-engine-toggle')),
+      toggleSailsrc = require('machine').build(require('./toggle-sailsrc')),
+      installGulpDependencies = require('machine').build(require('./install-gulp-dependencies'));
 
     createGulpFile({
       gulpFileSrcPath: '../templates/gulpfile.js',
@@ -58,35 +60,55 @@ module.exports = {
       },
       invalid: function (){ exits.invalid() },
       success: function() {
-        return exits.success();
-      }
-    });
-
-    createGulpTasks({
-      gulpFolderSrcPath: '../templates/tasks-gulp',
-      outputDir: '../../../tasks-gulp'
-    }).exec({
-      error: function (err){
-        console.error('an error occurred- error details:',err);
-        return exits.error();
-      },
-      invalid: function (){ exits.invalid() },
-      success: function() {
-        return exits.success();
-      }
-    });
-
-    createEngineToggle({
-      gulpFolderSrcPath: '../lib/gulp',
-      outputDir: '../../sails/lib/hooks/gulp'
-    }).exec({
-      error: function (err){
-        console.error('an error occurred- error details:',err);
-        return exits.error();
-      },
-      invalid: function (){ exits.invalid() },
-      success: function() {
-        return exits.success();
+        createGulpTasks({
+          gulpFolderSrcPath: '../templates/tasks-gulp',
+          outputFolderDir: '../../../tasks-gulp'
+        }).exec({
+          error: function (err){
+            console.error('an error occurred- error details:',err);
+            return exits.error();
+          },
+          invalid: function (){ exits.invalid() },
+          success: function() {
+            createEngineToggle({
+              gulpFolderSrcPath: '../lib/gulp',
+              outputDir: '../../../api/hooks/gulp'
+            }).exec({
+              error: function (err){
+                console.error('an error occurred- error details:',err);
+                return exits.error();
+              },
+              invalid: function (){ exits.invalid() },
+              success: function() {
+                // return exits.success();
+                toggleSailsrc({
+                  sailsrcSrc: '../json/.sailsrc',
+                  outputDir: '../../../.sailsrc'
+                }).exec({
+                  error: function (err){
+                    console.error('an error occurred- error details:',err);
+                    return exits.error();
+                  },
+                  invalid: function (){ exits.invalid() },
+                  success: function() {
+                    // return exits.success();
+                    installGulpDependencies({
+                    }).exec({
+                      error: function (err){
+                        console.error('an error occurred- error details:',err);
+                        return exits.error();
+                      },
+                      invalid: function (){ exits.invalid() },
+                      success: function() {
+                        return exits.success();
+                      }
+                    });
+                  }
+                });
+              }
+            });
+          }
+        });
       }
     });
   }

@@ -14,8 +14,11 @@
   "license": "MIT",
   "dependencies": {
     "fs-extra": "^0.24.0",
+    "lodash": "^3.10.1",
     "machine": "^10.0.0",
-    "machinepack-fs": "^5.3.0"
+    "machinepack-fs": "^5.3.0",
+    "machinepack-npm": "^5.1.0",
+    "util": "^0.10.3"
   },
   "devDependencies": {
     "test-machinepack-mocha": "^2.0.0"
@@ -27,7 +30,11 @@
       "create-gulp-file",
       "create-gulp-tasks",
       "create-engine-toggle",
-      "sails-gulpify"
+      "sails-gulpify",
+      "toggle-sailsrc",
+      "copy-files",
+      "install-gulp-dependencies",
+      "install-package-npm"
     ]
   },
   "repository": {

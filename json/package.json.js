@@ -21,7 +21,6 @@ module.exports = function dataForPackageJSON(scope) {
 
   // List default dependencies used for apps with a frontend
   var dependenciesFrontAndBackend = {
-    'ejs': getDependencyVersion(sailsPkg, 'ejs'),
     'gulp': getDependencyVersion(sailsPkg, 'gulp'),
     'gulp-autoprefixer': getDependencyVersion(sailsPkg, 'gulp-autoprefixer'),
     'gulp-cache': getDependencyVersion(sailsPkg, 'gulp-cache'),
@@ -44,12 +43,8 @@ module.exports = function dataForPackageJSON(scope) {
     'gulp-template-compile': getDependencyVersion(sailsPkg, 'gulp-template-compile'),
     'gulp-uglify': getDependencyVersion(sailsPkg, 'gulp-uglify'),
     'gulp-util': getDependencyVersion(sailsPkg, 'gulp-util'),
-    'include-all': getDependencyVersion(sailsPkg, 'include-all'),
-    'rc': getDependencyVersion(sailsPkg, 'rc'),
     'rimraf': getDependencyVersion(sailsPkg, 'rimraf'),
-    'run-sequence': getDependencyVersion(sailsPkg, 'run-sequence'),
-    'sails': sailsVersionDependency,
-    'sails-disk': getDependencyVersion(sailsPkg, 'sails-disk')
+    'run-sequence': getDependencyVersion(sailsPkg, 'run-sequence')
   };
 
   // List default dependencies used for back-end only apps (--no-frontend)
