@@ -1,7 +1,7 @@
 module.exports = {
-  friendlyName: 'Create engine toggle',
+  friendlyName: 'Create Gulp engine',
   description: 'Modifies core sails files ading the ability to toggle between grunt and gulp via cli argument',
-  extendedDescription: 'Use --engine=<gulp|grunt> to create project with that engine',
+  extendedDescription: 'Adds the gulp hook to api/hooks/gulp',
   cacheable: false,
   sync: false,
   environment: [],
@@ -56,19 +56,19 @@ module.exports = {
         return exits.error();
       },
       success: function() {
-        return exits.success();
-        //cp({
-        //  gulpFileSrcPath: path.resolve(__dirname, '../lib/default-hooks.js'),
-        //  outputDir: path.resolve(__dirname, '../../sails/lib/app/configuration/default-hooks.js')
-        //}).exec({
-        //  error: function (err){
-        //    console.error('an error occurred- error details:',err);
-        //    return exits.error();
-        //  },
-        //  success: function() {
-        //    return exits.success();
-        //  }
-        //});
+        //return exits.success();
+        cp({
+          gulpFileSrcPath: path.resolve(__dirname, '../lib/default-hooks.js'),
+          outputDir: path.resolve(__dirname, '../../sails/lib/app/configuration/default-hooks.js')
+        }).exec({
+          error: function (err){
+            console.error('an error occurred- error details:',err);
+            return exits.error();
+          },
+          success: function() {
+            return exits.success();
+          }
+        });
       }
     });
   }

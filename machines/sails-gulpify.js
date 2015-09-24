@@ -7,19 +7,6 @@ module.exports = {
   environment: [],
 
   inputs: {
-    gulp: {
-      friendlyName: 'Use Gulp engine',
-      description: 'Toggle for the gulp engine',
-      example: 'gulp',
-      required: false
-    },
-
-    grunt: {
-      friendlyName: 'Use Grunt engine',
-      description: 'toggle for the grunt engine',
-      example: 'grunt',
-      required: false
-    }
   },
 
   exits: {
@@ -46,7 +33,7 @@ module.exports = {
   fn: function(inputs, exits, env) {
     var createGulpFile = require('machine').build(require('./create-gulp-file')),
       createGulpTasks = require('machine').build(require('./create-gulp-tasks')),
-      createEngineToggle = require('machine').build(require('./create-engine-toggle')),
+      createGulpEngine = require('machine').build(require('./create-gulp-engine')),
       toggleSailsrc = require('machine').build(require('./toggle-sailsrc')),
       installGulpDependencies = require('machine').build(require('./install-gulp-dependencies'));
 
@@ -70,9 +57,10 @@ module.exports = {
           },
           invalid: function (){ exits.invalid() },
           success: function() {
-            createEngineToggle({
+            createGulpEngine({
               gulpFolderSrcPath: '../lib/gulp',
-              outputDir: '../../../api/hooks/gulp'
+              outputDir: '../../sails/lib/hooks/gulp'
+              //outputDir: '../../../api/hooks/gulp'
             }).exec({
               error: function (err){
                 console.error('an error occurred- error details:',err);
@@ -82,7 +70,7 @@ module.exports = {
               success: function() {
                 // return exits.success();
                 toggleSailsrc({
-                  sailsrcSrc: '../json/.sailsrc',
+                  sailsrcSrc: '../json/gulp.sailsrc',
                   outputDir: '../../../.sailsrc'
                 }).exec({
                   error: function (err){

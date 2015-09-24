@@ -7,6 +7,7 @@ module.exports = {
   environment: [],
 
   inputs: {
+
     sailsrcSrc: {
       friendlyName: 'Gulp file source path',
       description: 'The directory where the gulp file lives.  If not specified as an absolute path, this will be resolved relative to the current working directory.',
