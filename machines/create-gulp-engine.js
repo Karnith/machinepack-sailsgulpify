@@ -1,13 +1,12 @@
 module.exports = {
-  friendlyName: 'Create gulp tasks',
-  description: 'Creates the gulp task folder and all related task files',
-  extendedDescription: '',
+  friendlyName: 'Create Gulp engine',
+  description: 'Modifies core sails files ading the ability to toggle between grunt and gulp via cli argument',
+  extendedDescription: 'Adds the gulp hook to api/hooks/gulp',
   cacheable: false,
   sync: false,
   environment: [],
 
   inputs: {
-
     gulpFolderSrcPath: {
       friendlyName: 'Gulp file source path',
       description: 'The directory where the gulp file lives.  If not specified as an absolute path, this will be resolved relative to the current working directory.',
@@ -15,13 +14,14 @@ module.exports = {
       required: true
     },
 
-    outputFolderDir: {
+    outputDir: {
       friendlyName: 'Output directory',
       description: 'The path to the directory where gulp file should be placed.',
       example: './foo',
       required: true
     }
   },
+
 
   exits: {
 
@@ -49,14 +49,26 @@ module.exports = {
 
     cp({
       gulpFileSrcPath: path.resolve(__dirname, inputs.gulpFolderSrcPath),
-      outputDir: path.resolve(__dirname, inputs.outputFolderDir)
+      outputDir: path.resolve(__dirname, inputs.outputDir)
     }).exec({
       error: function (err){
         console.error('an error occurred- error details:',err);
         return exits.error();
       },
       success: function() {
-        return exits.success();
+        //return exits.success();
+        cp({
+          gulpFileSrcPath: path.resolve(__dirname, '../lib/default-hooks.js'),
+          outputDir: path.resolve(__dirname, '../../sails/lib/app/configuration/default-hooks.js')
+        }).exec({
+          error: function (err){
+            console.error('an error occurred- error details:',err);
+            return exits.error();
+          },
+          success: function() {
+            return exits.success();
+          }
+        });
       }
     });
   }

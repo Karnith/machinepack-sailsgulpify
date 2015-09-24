@@ -18,6 +18,16 @@ $ npm install machinepack-sailsgulpify
 ## Usage
 
 For the latest usage documentation, version information, and test status of this module, see <a href="http://node-machine.org/machinepack-sailsgulpify" title="Add toggle ability to choose gulp or grunt as task runner on create new  (for node.js)">http://node-machine.org/machinepack-sailsgulpify</a>.  The generated manpages for each machine contain a complete reference of all expected inputs, possible exit states, and example return values.  If you need more help, or find a bug, jump into [Gitter](https://gitter.im/node-machine/general) or leave a message in the project [newsgroup](https://groups.google.com/forum/?hl=en#!forum/node-machine).
+To configure, run
+```
+npm install machinepack-prompts
+node /node_moodules/machinepack-sailsgulpify/templates/toggleEngine.js
+```
+at the prompt, enter ```gulpifysails``` for install. To toggle between gulp and grunt, use gulp or grunt instead of gulpifysails with toggleEngine.js
+
+## Todo
+
+Find a way to move the toggleEngine.js to teh root of the project on machinepack install.
 
 ## About  &nbsp; [![Gitter](https://badges.gitter.im/Join Chat.svg)](https://gitter.im/node-machine/general?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 

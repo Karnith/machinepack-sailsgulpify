@@ -1,24 +1,24 @@
 module.exports = {
-  friendlyName: 'Create gulp tasks',
-  description: 'Creates the gulp task folder and all related task files',
-  extendedDescription: '',
+  friendlyName: 'Toggle Sailsrc',
+  description: 'Swap .sailsrc, changing from grunt to gulp and back',
+  extendedDescription: 'Use grunt or gulp',
   cacheable: false,
   sync: false,
   environment: [],
 
   inputs: {
 
-    gulpFolderSrcPath: {
+    sailsrcSrc: {
       friendlyName: 'Gulp file source path',
       description: 'The directory where the gulp file lives.  If not specified as an absolute path, this will be resolved relative to the current working directory.',
-      example: './templates/gulpfile.js',
+      example: '../templates/gulpfile.js',
       required: true
     },
 
-    outputFolderDir: {
+    outputDir: {
       friendlyName: 'Output directory',
       description: 'The path to the directory where gulp file should be placed.',
-      example: './foo',
+      example: '../../../gulpfile.js',
       required: true
     }
   },
@@ -34,12 +34,6 @@ module.exports = {
       friendlyName: 'then',
       description: 'Normal outcome.',
       void: true
-    },
-
-    doesNotExist: {
-      friendlyName: 'does not exist',
-      description: 'Nothing exists at the provided LESS source directory path.',
-      example: 'abc123'
     }
   },
 
@@ -48,8 +42,8 @@ module.exports = {
       cp = require('machine').build(require('./copy-files'));
 
     cp({
-      gulpFileSrcPath: path.resolve(__dirname, inputs.gulpFolderSrcPath),
-      outputDir: path.resolve(__dirname, inputs.outputFolderDir)
+      gulpFileSrcPath: path.resolve(__dirname, inputs.sailsrcSrc),
+      outputDir: path.resolve(__dirname, inputs.outputDir)
     }).exec({
       error: function (err){
         console.error('an error occurred- error details:',err);
