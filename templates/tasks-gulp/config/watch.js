@@ -11,7 +11,9 @@
  *
  */
 module.exports = function(gulp, plugins, growl) {
-	var server = plugins.livereload();
+	var server = plugins.livereload;
+	server.listen();
+	
 	gulp.task('watch:api', function() {
 		// Watch Style files
 		return gulp.watch('api/**/*', ['syncAssets'])
