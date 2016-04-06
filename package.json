@@ -1,6 +1,6 @@
 {
   "name": "machinepack-sailsgulpify",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Add toggle ability to choose gulp or grunt as task runner on create new ",
   "scripts": {
     "test": "node ./node_modules/test-machinepack-mocha/bin/testmachinepack-mocha.js"
