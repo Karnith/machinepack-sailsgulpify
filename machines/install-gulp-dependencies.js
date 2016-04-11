@@ -42,7 +42,7 @@ module.exports = {
           'gulp-jade',
           'gulp-jshint',
           'gulp-less',
-          'gulp-linker',
+          'gulp-inject',
           'gulp-livereload',
           'gulp-load-plugins',
           'gulp-minify-css',
