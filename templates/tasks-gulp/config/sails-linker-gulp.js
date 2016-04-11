@@ -8,7 +8,7 @@
  * templates using a <script> tag.
  *
  * For usage docs see (the original):
- * 		https://github.com/Zolmeister/grunt-sails-linker
+ * 		https://github.com/Zolmeister/grunt-sails-inject
  *
  */
 module.exports = function(gulp, plugins, growl) {
@@ -18,29 +18,38 @@ module.exports = function(gulp, plugins, growl) {
         // Read templates
         return gulp.src('.tmp/public/**/*.html')
             // Link the javaScript
-            .pipe(plugins.linker({
-                scripts: [require('../pipeline').jsFilesToInject],
-                startTag: '<!--SCRIPTS-->',
-                endTag: '<!--SCRIPTS END-->',
-                fileTmpl: '<script src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(require('../pipeline').jsFilesToInject, {read: false}),
+                {
+                  starttag: '<!--SCRIPTS-->',
+                  endtag: '<!--SCRIPTS END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the styles
-            .pipe(plugins.linker({
-                scripts: [require('../pipeline').cssFilesToInject],
-                startTag: '<!--STYLES-->',
-                endTag: '<!--STYLES END-->',
-                fileTmpl: '<link rel="stylesheet" href="%s">',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(require('../pipeline').cssFilesToInject, {read: false}),
+                {
+                  starttag: '<!--STYLES-->',
+                  endtag: '<!--STYLES END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the JST Templates
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/jst.js'],
-                startTag: '<!--TEMPLATES-->',
-                endTag: '<!--TEMPLATES END-->',
-                fileTmpl: '<script type="text/javascript" src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src( ['.tmp/public/jst.js'], {read: false}),
+                {
+                  starttag: '<!--TEMPLATES-->',
+                  endtag: '<!--TEMPLATES END-->',
+                  relative: true
+                }
+              )
+            )
             // Write modified files...
             .pipe(gulp.dest('.tmp/public/'))
             .pipe(plugins.if(growl, plugins.notify({ message: 'sails-linker-gulp:devAssets task complete' })));
@@ -51,29 +60,38 @@ module.exports = function(gulp, plugins, growl) {
         // Read templates
         return gulp.src(['views/**/*.html', 'views/**/*.ejs'])
             // Link the javaScript
-            .pipe(plugins.linker({
-                scripts: [require('../pipeline').jsFilesToInject],
-                startTag: '<!--SCRIPTS-->',
-                endTag: '<!--SCRIPTS END-->',
-                fileTmpl: '<script src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(require('../pipeline').jsFilesToInject, {read: false}),
+                {
+                  starttag: '<!--SCRIPTS-->',
+                  endtag: '<!--SCRIPTS END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the styles
-            .pipe(plugins.linker({
-                scripts: [require('../pipeline').cssFilesToInject],
-                startTag: '<!--STYLES-->',
-                endTag: '<!--STYLES END-->',
-                fileTmpl: '<link rel="stylesheet" href="%s">',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(require('../pipeline').cssFilesToInject, {read: false}),
+                {
+                  starttag: '<!--STYLES-->',
+                  endtag: '<!--STYLES END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the JST Templates
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/jst.js'],
-                startTag: '<!--TEMPLATES-->',
-                endTag: '<!--TEMPLATES END-->',
-                fileTmpl: '<script type="text/javascript" src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src( ['.tmp/public/jst.js'], {read: false}),
+                {
+                  starttag: '<!--TEMPLATES-->',
+                  endtag: '<!--TEMPLATES END-->',
+                  relative: true
+                }
+              )
+            )
             // Write modified files...
             .pipe(gulp.dest('views/'))
             .pipe(plugins.if(growl, plugins.notify({ message: 'sails-linker-gulp:devViews task complete' })));
@@ -84,31 +102,38 @@ module.exports = function(gulp, plugins, growl) {
         // Read templates
         return gulp.src('.tmp/public/**/*.html')
             // Link the JavaScript
-            .pipe(plugins.linker({
-                scripts: [require('../pipeline').jsFilesToInject],
-                startTag: '<!--SCRIPTS-->',
-                endTag: '<!--SCRIPTS END-->',
-                fileTmpl: '<script src="%s"></script>',
-                appRoot: '.tmp/public',
-                relative: true
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(require('../pipeline').jsFilesToInject, {read: false}),
+                {
+                  starttag: '<!--SCRIPTS-->',
+                  endtag: '<!--SCRIPTS END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the styles
-            .pipe(plugins.linker({
-                scripts: [require('../pipeline').cssFilesToInject],
-                startTag: '<!--STYLES-->',
-                endTag: '<!--STYLES END-->',
-                fileTmpl: '<link rel="stylesheet" href="%s">',
-                appRoot: '.tmp/public',
-                relative: true
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(require('../pipeline').cssFilesToInject, {read: false}),
+                {
+                  starttag: '<!--STYLES-->',
+                  endtag: '<!--STYLES END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the JST Templates
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/jst.js'],
-                startTag: '<!--TEMPLATES-->',
-                endTag: '<!--TEMPLATES END-->',
-                fileTmpl: '<script type="text/javascript" src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src( ['.tmp/public/jst.js'], {read: false}),
+                {
+                  starttag: '<!--TEMPLATES-->',
+                  endtag: '<!--TEMPLATES END-->',
+                  relative: true
+                }
+              )
+            )
             // Write modified files...
             .pipe(gulp.dest('.tmp/public/'))
             .pipe(plugins.if(growl, plugins.notify({ message: 'sails-linker-gulp:devAssetsRelative task complete' })));
@@ -119,31 +144,38 @@ module.exports = function(gulp, plugins, growl) {
         // Read templates
         return gulp.src(['views/**/*.html', 'views/**/*.ejs'])
             // Link the javaScript
-            .pipe(plugins.linker({
-                scripts: [require('../pipeline').jsFilesToInject],
-                startTag: '<!--SCRIPTS-->',
-                endTag: '<!--SCRIPTS END-->',
-                fileTmpl: '<script src="%s"></script>',
-                appRoot: '.tmp/public',
-                relative: true
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(require('../pipeline').jsFilesToInject, {read: false}),
+                {
+                  starttag: '<!--SCRIPTS-->',
+                  endtag: '<!--SCRIPTS END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the styles
-            .pipe(plugins.linker({
-                scripts: [require('../pipeline').cssFilesToInject],
-                startTag: '<!--STYLES-->',
-                endTag: '<!--STYLES END-->',
-                fileTmpl: '<link rel="stylesheet" href="%s">',
-                appRoot: '.tmp/public',
-                relative: true
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(require('../pipeline').cssFilesToInject, {read: false}),
+                {
+                  starttag: '<!--STYLES-->',
+                  endtag: '<!--STYLES END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the JST Templates
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/jst.js'],
-                startTag: '<!--TEMPLATES-->',
-                endTag: '<!--TEMPLATES END-->',
-                fileTmpl: '<script type="text/javascript" src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src( ['.tmp/public/jst.js'], {read: false}),
+                {
+                  starttag: '<!--TEMPLATES-->',
+                  endtag: '<!--TEMPLATES END-->',
+                  relative: true
+                }
+              )
+            )
             // Write modified files...
             .pipe(gulp.dest('views/'))
             .pipe(plugins.if(growl, plugins.notify({ message: 'sails-linker-gulp:devViewsRelative task complete' })));
@@ -154,29 +186,38 @@ module.exports = function(gulp, plugins, growl) {
         // Read templates
         return gulp.src('.tmp/public/**/*.html')
             // Link the JavaScript
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/concat/production.min.js'],
-                startTag: '<!--SCRIPTS-->',
-                endTag: '<!--SCRIPTS END-->',
-                fileTmpl: '<script src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/concat/production.min.js'], {read: false}),
+                {
+                  starttag: '<!--SCRIPTS-->',
+                  endtag: '<!--SCRIPTS END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the styles
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/concat/production.min.css'],
-                startTag: '<!--STYLES-->',
-                endTag: '<!--STYLES END-->',
-                fileTmpl: '<link rel="stylesheet" href="%s">',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/concat/production.min.css'], {read: false}),
+                {
+                  starttag: '<!--STYLES-->',
+                  endtag: '<!--STYLES END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the JST Templates
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/jst.js'],
-                startTag: '<!--TEMPLATES-->',
-                endTag: '<!--TEMPLATES END-->',
-                fileTmpl: '<script type="text/javascript" src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/jst.js'], {read: false}),
+                {
+                  starttag: '<!--TEMPLATES-->',
+                  endtag: '<!--TEMPLATES END-->',
+                  relative: true
+                }
+              )
+            )
             // Write modified files...
             .pipe(gulp.dest('.tmp/public/'))
             .pipe(plugins.if(growl, plugins.notify({ message: 'sails-linker-gulp:prodAssets task complete' })));
@@ -187,29 +228,38 @@ module.exports = function(gulp, plugins, growl) {
         // Read templates
         return gulp.src(['views/**/*.html', 'views/**/*.ejs'])
             // Link the JavaScript
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/concat/production.min.js'],
-                startTag: '<!--SCRIPTS-->',
-                endTag: '<!--SCRIPTS END-->',
-                fileTmpl: '<script src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/concat/production.min.js'], {read: false}),
+                {
+                  starttag: '<!--SCRIPTS-->',
+                  endtag: '<!--SCRIPTS END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the styles
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/concat/production.min.css'],
-                startTag: '<!--STYLES-->',
-                endTag: '<!--STYLES END-->',
-                fileTmpl: '<link rel="stylesheet" href="%s">',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/concat/production.min.css'], {read: false}),
+                {
+                  starttag: '<!--STYLES-->',
+                  endtag: '<!--STYLES END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the JST Templates
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/jst.js'],
-                startTag: '<!--TEMPLATES-->',
-                endTag: '<!--TEMPLATES END-->',
-                fileTmpl: '<script type="text/javascript" src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/jst.js'], {read: false}),
+                {
+                  starttag: '<!--TEMPLATES-->',
+                  endtag: '<!--TEMPLATES END-->',
+                  relative: true
+                }
+              )
+            )
             // Write modified files...
             .pipe(gulp.dest('views/'))
             .pipe(plugins.if(growl, plugins.notify({ message: 'sails-linker-gulp:prodViews task complete' })));
@@ -220,31 +270,38 @@ module.exports = function(gulp, plugins, growl) {
         // Read templates
         return gulp.src('.tmp/public/**/*.html')
             // Link the JavaScript
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/concat/production.min.js'],
-                startTag: '<!--SCRIPTS-->',
-                endTag: '<!--SCRIPTS END-->',
-                fileTmpl: '<script src="%s"></script>',
-                appRoot: '.tmp/public',
-                relative: true
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/concat/production.min.js'], {read: false}),
+                {
+                  starttag: '<!--SCRIPTS-->',
+                  endtag: '<!--SCRIPTS END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the styles
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/concat/production.min.css'],
-                startTag: '<!--STYLES-->',
-                endTag: '<!--STYLES END-->',
-                fileTmpl: '<link rel="stylesheet" href="%s">',
-                appRoot: '.tmp/public',
-                relative: true
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/concat/production.min.css'], {read: false}),
+                {
+                  starttag: '<!--STYLES-->',
+                  endtag: '<!--STYLES END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the JST Templates
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/jst.js'],
-                startTag: '<!--TEMPLATES-->',
-                endTag: '<!--TEMPLATES END-->',
-                fileTmpl: '<script type="text/javascript" src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/jst.js'], {read: false}),
+                {
+                  starttag: '<!--TEMPLATES-->',
+                  endtag: '<!--TEMPLATES END-->',
+                  relative: true
+                }
+              )
+            )
             // Write modified files...
             .pipe(gulp.dest('.tmp/public/'))
             .pipe(plugins.if(growl, plugins.notify({ message: 'sails-linker-gulp:prodAssetsRelative task complete' })));
@@ -255,31 +312,38 @@ module.exports = function(gulp, plugins, growl) {
         // Read templates
         return gulp.src(['views/**/*.html', 'views/**/*.ejs'])
             // Link the JavaScript
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/concat/production.min.js'],
-                startTag: '<!--SCRIPTS-->',
-                endTag: '<!--SCRIPTS END-->',
-                fileTmpl: '<script src="%s"></script>',
-                appRoot: '.tmp/public',
-                relative: true
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/concat/production.min.js'], {read: false}),
+                {
+                  starttag: '<!--SCRIPTS-->',
+                  endtag: '<!--SCRIPTS END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the styles
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/concat/production.min.css'],
-                startTag: '<!--STYLES-->',
-                endTag: '<!--STYLES END-->',
-                fileTmpl: '<link rel="stylesheet" href="%s">',
-                appRoot: '.tmp/public',
-                relative: true
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/concat/production.min.css'], {read: false}),
+                {
+                  starttag: '<!--STYLES-->',
+                  endtag: '<!--STYLES END-->',
+                  relative: true
+                }
+              )
+            )
             // Link the JST Templates
-            .pipe(plugins.linker({
-                scripts: ['.tmp/public/jst.js'],
-                startTag: '<!--TEMPLATES-->',
-                endTag: '<!--TEMPLATES END-->',
-                fileTmpl: '<script type="text/javascript" src="%s"></script>',
-                appRoot: '.tmp/public'
-            }))
+            .pipe(
+              plugins.inject(
+                gulp.src(['.tmp/public/jst.js'], {read: false}),
+                {
+                  starttag: '<!--TEMPLATES-->',
+                  endtag: '<!--TEMPLATES END-->',
+                  relative: true
+                }
+              )
+            )
             // Write modified files...
             .pipe(gulp.dest('views/'))
             .pipe(plugins.if(growl, plugins.notify({ message: 'sails-linker-gulp:prodViewsRelative task complete' })));
